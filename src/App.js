@@ -87,15 +87,6 @@ class App extends React.Component {
           <div class='container'>
             <div>
               <h2 class='text-2 mb-1'>Todos los derechos reservados</h2>
-              <a href='http://twitter.com'>
-                <i class='fab fa-twitter fa-2x'></i>
-              </a>
-              <a href='http://facebook.com'>
-                <i class='fab fa-facebook fa-2x'></i>
-              </a>
-              <a href='http://youtube.com'>
-                <i class='fab fa-youtube fa-2x'></i>
-              </a>
             </div>
             <div>
               <h3>Información adicional</h3>
