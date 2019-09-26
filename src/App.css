@@ -46,6 +46,9 @@ img {
 
 .navbar {
   font-size: 1.2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
   background-color: var(--primary-color);

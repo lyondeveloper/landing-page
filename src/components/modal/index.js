@@ -13,24 +13,49 @@ import {
 } from 'reactstrap';
 
 import { toast } from 'react-toastify';
+import { firestore } from '../../firebase/utils';
 
 class FormModal extends React.Component {
   state = {
-    isOpenAlert: false
+    isOpenAlert: false,
+    email: '',
+    phone: '',
+    name: ''
   };
 
-  onClickSuscribe = () => {
-    const { email, phone, name, toggle } = this.props;
+  handleChange = ({ target: { name, value } }) =>
+    this.setState({ [name]: value });
+
+  handleSubmit = async e => {
+    e.preventDefault();
+
+    const status = await firestore.collection('users').add({
+      name: this.state.name,
+      phone: this.state.phone,
+      email: this.state.email
+    });
+
+    // if (!status) {
+    //   toast.error('Error 500');
+    //   return;
+    // }
+  };
+
+  onClickSuscribe = e => {
+    const { email, phone, name } = this.state;
+    const { toggle } = this.props;
     if (email.length <= 0 || phone.length <= 0 || name.length <= 0) {
       toast.error('Asegurate que todos los campos esten rellenos');
     } else {
+      this.handleSubmit(e);
       toast.success('Felicidades, te has suscrito');
       toggle();
     }
   };
 
   render() {
-    const { email, name, phone, isOpen, toggle, handleChange } = this.props;
+    const { isOpen, toggle } = this.props;
+    const { email, name, phone } = this.state;
     return (
       <div>
         <Modal isOpen={isOpen} toggle={toggle}>
@@ -47,7 +72,7 @@ class FormModal extends React.Component {
                   id='name'
                   required
                   value={name}
-                  onChange={handleChange}
+                  onChange={this.handleChange}
                 />
               </FormGroup>
               <FormGroup>
@@ -57,7 +82,7 @@ class FormModal extends React.Component {
                   name='email'
                   required
                   id='email'
-                  onChange={handleChange}
+                  onChange={this.handleChange}
                   value={email}
                 />
               </FormGroup>
@@ -69,7 +94,7 @@ class FormModal extends React.Component {
                   id='phone'
                   value={phone}
                   required
-                  onChange={handleChange}
+                  onChange={this.handleChange}
                 />
               </FormGroup>
             </Form>

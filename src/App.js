@@ -8,15 +8,9 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    email: '',
-    phone: '',
-    name: '',
     isOpen: false,
     isOpenThanks: false
   };
-
-  handleChange = ({ target: { name, value } }) =>
-    this.setState({ [name]: value });
 
   modalChange = () =>
     this.setState({
@@ -63,6 +57,7 @@ class App extends React.Component {
               toggle={this.modalChange}
               handleChange={this.handleChange}
               modalThanksChange={this.modalThanksChange}
+              handlesubmit={this.handleSubmit}
             ></FormModal>
           </div>
         </section>
